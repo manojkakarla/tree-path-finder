@@ -1,4 +1,4 @@
-Finds Minimunm/Maximum path in a Triangular structure data 
+Finds Minimum/Maximum path in a Triangular structure data 
 
 Sample data:
 ```
@@ -14,3 +14,6 @@ Sample data:
 min-path: 7 -> 3 -> 5 -> 9 -> 8 -> 3 -> 6 and sum is: 41
 
 max-path: 7 -> 6 -> 7 -> 11 -> 9 -> 15 -> 43 and sum is: 98
+
+
+Note: Uses lombok plugin, ensure its added to ide to avoid compile issues.
