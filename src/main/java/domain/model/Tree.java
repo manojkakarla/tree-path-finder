@@ -1,16 +1,12 @@
 package domain.model;
 
-import com.google.common.base.Joiner;
-import com.google.common.collect.Lists;
-
 import java.util.AbstractMap.SimpleEntry;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class Tree {
-  private Map<Integer, List<TriangleNode>> nodesLevelMap = new HashMap<>();
+  private final Map<Integer, List<TriangleNode>> nodesLevelMap = new HashMap<>();
 
   public void addNodeForLevel(int level, TriangleNode node) {
     List<TriangleNode> triangleNodes = nodesLevelMap.computeIfAbsent(level, k -> new ArrayList<>(level));
@@ -42,7 +38,9 @@ public class Tree {
   }
 
   private String buildResult(SimpleEntry<Integer, List<Integer>> sumValue, String pathType) {
-    String path = Joiner.on(" -> ").join(Lists.reverse(sumValue.getValue()));
+    List<Integer> values = sumValue.getValue();
+    Collections.reverse(values);
+    String path = values.stream().map(Object::toString).collect(Collectors.joining(" -> "));
     return String.format("%s: %s and sum is: %d", pathType, path, sumValue.getKey());
   }
 
@@ -52,12 +50,10 @@ public class Tree {
 
   @Override
   public String toString() {
-    StringBuilder builder = new StringBuilder("\n");
-    for (Map.Entry<Integer, List<TriangleNode>> entry : nodesLevelMap.entrySet()) {
-      builder.append(entry.getKey()).append(": ")
-              .append(entry.getValue())
-              .append("\n");
-    }
-    return builder.toString();
+    AtomicInteger counter = new AtomicInteger();
+    int levels = nodesLevelMap.size();
+    return nodesLevelMap.entrySet().stream().map(entry -> entry.getKey() + ": " +
+            " ".repeat(levels - (counter.getAndIncrement())) +
+            entry.getValue()).collect(Collectors.joining("\n", "\n", ""));
   }
 }

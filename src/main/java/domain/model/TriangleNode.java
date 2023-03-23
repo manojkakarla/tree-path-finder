@@ -2,15 +2,13 @@ package domain.model;
 
 import lombok.Data;
 
-import javax.annotation.Nonnull;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.LinkedList;
 import java.util.List;
 
 @Data
 public class TriangleNode {
-  @Nonnull
-  private final Integer value;
+  private final int value;
   private TriangleNode left;
   private TriangleNode right;
   private TriangleNode next;
@@ -59,7 +57,7 @@ public class TriangleNode {
 
   @Override
   public String toString() {
-    return value.toString();
+    return String.valueOf(value);
   }
 
   private boolean hasChildren() {

@@ -1,4 +1,4 @@
-Finds Minimum/Maximum path in a Triangular structure data 
+Finds path for Minimum/Maximum sum in a Triangular structure data 
 
 Sample data:
 ```

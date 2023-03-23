@@ -3,16 +3,13 @@ package application;
 import domain.model.Tree;
 import domain.model.TriangleNode;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.math.NumberUtils;
 
-import javax.annotation.Nonnull;
-import java.io.IOException;
 import java.util.List;
 
 @Slf4j
 public class TreeBuilder {
 
-  Tree buildSimpleTree(@Nonnull List<String> lines) throws IOException {
+  Tree buildSimpleTree(List<String> lines) {
     int level = 1;
     Tree tree = new Tree();
     for (String line : lines) {
@@ -31,13 +28,11 @@ public class TreeBuilder {
   }
 
   private TriangleNode buildNode(String split) {
-    validateNumber(split);
-    return new TriangleNode(Integer.parseInt(split));
-  }
-
-  private void validateNumber(String split) {
-    if (!NumberUtils.isNumber(split)) {
+    try {
+      return new TriangleNode(Integer.parseInt(split.trim()));
+    } catch (NumberFormatException e) {
       throw new IllegalArgumentException("Invalid data: " + split);
     }
   }
 }
+
