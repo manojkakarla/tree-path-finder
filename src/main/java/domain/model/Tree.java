@@ -44,7 +44,7 @@ public class Tree {
     return String.format("%s: %s and sum is: %d", pathType, path, sumValue.getKey());
   }
 
-  private TriangleNode getRoot() {
+  public TriangleNode getRoot() { // Changed from package-private to public
     return nodesLevelMap.get(1).get(0);
   }
 
